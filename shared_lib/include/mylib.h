@@ -14,7 +14,7 @@ typedef struct opaque_t* handle_t;
 
 status_t mylib_create(handle_t* handle);
 status_t mylib_destroy(handle_t handle);
-status_t mylib_dump(handle_t handle) ;
 status_t mylib_set(handle_t handle, int value);
+status_t mylib_dump(handle_t handle) ;
 
 #endif
