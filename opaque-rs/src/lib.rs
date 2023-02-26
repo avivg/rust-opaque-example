@@ -1,17 +1,18 @@
 #[derive(Debug)]
 #[repr(C)]
-pub enum Status {
+enum Status {
     Success,
     Failure,
 }
 
 #[repr(C)]
-pub struct CMyLib {
+struct CMyLib {
     _f: [u8; 0],
+    _m: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
-pub type MyLibHandle = *mut CMyLib;
+type MyLibHandle = *mut CMyLib;
 impl CMyLib {
-    pub fn handle() -> MyLibHandle {
+    fn handle() -> MyLibHandle {
         std::ptr::null_mut()
     }
 }
@@ -65,6 +66,7 @@ impl Drop for MyLib {
 
 //
 // Run with LD_LIBRARY_PATH=../shared_lib/build:$LD_LIBRARY_PATH cargo test
+//
 #[cfg(test)]
 mod tests {
     use super::*;
